@@ -8,7 +8,7 @@ int main(void)
     void *ptr = (void *)0xabcdef;
     void *null_ptr = NULL;
 
-    printf("===== BASIC TESTS =====\n");
+    printf("********** BASIC TESTS **********\n");
 
     r_ft = ft_printf("ft: Char: %c\n", 'A');
     r_og = printf ("og: Char: %c\n\n", 'A');
@@ -30,7 +30,7 @@ int main(void)
     r_og = printf ("og: Pointer NULL: %p\n\n", null_ptr);
     printf("RET ft=%d, og=%d\n\n", r_ft, r_og);
 
-    printf("===== NUMERIC TESTS =====\n");
+    printf("********** NUMERIC TESTS **********\n");
 
     r_ft = ft_printf("ft: INT MIN: %d\n", INT_MIN);
     r_og = printf ("og: INT MIN: %d\n\n", INT_MIN);
@@ -48,7 +48,7 @@ int main(void)
     r_og = printf ("og: Negative: %d\n\n", -12345);
     printf("RET ft=%d, og=%d\n\n", r_ft, r_og);
 
-    printf("===== HEX TESTS =====\n");
+    printf("********** HEX TESTS **********\n");
 
     r_ft = ft_printf("ft: Hex lower: %x\n", 0xdeadbeef);
     r_og = printf ("og: Hex lower: %x\n\n", 0xdeadbeef);
@@ -58,7 +58,7 @@ int main(void)
     r_og = printf ("og: Hex upper: %X\n\n", 0xdeadbeef);
     printf("RET ft=%d, og=%d\n\n", r_ft, r_og);
 
-    printf("===== PERCENT HELL =====\n");
+    printf("********** PERCENT HELL **********\n");
 
     r_ft = ft_printf("ft: %%\n");
     r_og = printf ("og: %%\n\n");
@@ -92,7 +92,7 @@ int main(void)
     r_og = printf ("og: \"%%\\n\\n\"\n\n");
     printf("RET ft=%d, og=%d\n\n", r_ft, r_og);
 
-    printf("===== SPECIAL VALUES =====\n");
+    printf("********** SPECIAL VALUES **********\n");
 
     r_ft = ft_printf("ft: Empty string: \"%s\"\n", "");
     r_og = printf ("og: Empty string: \"%s\"\n\n", "");
@@ -102,7 +102,7 @@ int main(void)
     r_og = printf ("og: Zero pointer: %p\n\n", 0);
     printf("RET ft=%d, og=%d\n\n", r_ft, r_og);
 
-    printf("===== MIX EVERYTHING =====\n");
+    printf("********** MIX EVERYTHING **********\n");
 
     r_ft = ft_printf("ft: %d %u %x %X %s %c %p %%\n",
         -42, 42, 42, 42, "yo", 'Z', &ptr);
