@@ -6,103 +6,75 @@
 /*   By: pamohamm <pamohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:04:53 by pamohamm          #+#    #+#             */
-/*   Updated: 2025/11/10 20:58:32 by pamohamm         ###   ########.fr       */
+/*   Updated: 2025/11/11 20:04:17 by pamohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
+
+
+
+
+/**
+ * @brief 
+ * 
+ * @param str	the pointer to the immediate character after the '%' in the str.
+ * @param args	list of arguments passed to our ft_printf function.
+ * 				which is the same as the number of '%'s found in va_list args.
+ * @return (int) the number of characters printed
+ */
+static int	find_format(char *str, va_list args)
+{
+	int	len;
+
+	if (!str)
+		return (-1);
+	len = 0;
+	if (*str == 'c')
+		ft_putchar_fd(va_arg(args, int), 1);
+	else if (*str == 's')
+		ft_putchar_fd(va_arg(args, char *), 1);
+	else if (*str == 'p')
+		ft_putchar_fd(va_arg(args, void *), 1); //??? unsigned int
+	else if (*str == 'd' || *str == 'i')
+		ft_putchar_fd(va_arg(args, int), 1); //???
+	else if (*str == 'u')
+		ft_putchar_fd(va_arg(args, unsigned int), 1); //???
+	else if (*str == 'x')
+		ft_putchar_fd(va_arg(args, unsigned int), 1); //???
+	else if (*str == 'X')
+		ft_putchar_fd(va_arg(args, unsigned int), 1); //???
+	else if (*str == '%')
+		ft_putchar_fd(va_arg(args, char), 1); //???
+	return (len);
+}
+
 int	ft_printf(const	char *str, ...)
 {
-	int	i;
-	int	final_len;
-	
+	int		i;
+	int		failed;
+	size_t	final_len;
 	va_list	args;
+	
 	va_start(args, str);
+	failed = -1;
 	i = 0;
 	final_len = 0;
 	while (str[i])
 	{
-		// if (str[i])
-		if (str[i] == '%' && ft_strchr("cspdiuxX%", str[i + 1]))
+		if (str[i] == '%' && !ft_strchr("cspdiuxX%", str[i + 1]))
+			return (failed);
+		else if (str[i] == '%' && ft_strchr("cspdiuxX%", str[i + 1]))
 		{
-			// final_len += (int)write(1, '%', 1); 
-			i++;
+			final_len += find_format(&str[i + 1], args);
+			final_len++;
 		}
+		else
+			final_len = final_len + (int)write(1, &str[i + 1], 1);
 		i++;
 	}
 	va_end(args);
-	// i = (int)write(1, "12345\n", 6);
-	return (i);
+	return (final_len);
 }
-
-// int	main(void)
-// {
-// 	int	syst;
-// 	int	myft;
-
-// 	myft = ft_printf("12345\n");
-// 	syst = printf("12345\n");
-// 	printf("ft: %d	vs	sys: %d\n", myft, syst);
-
-// 	return (0);
-// }
-
-
-//learning more about stdarg.h
-void foo(char *fmt, ...)
-{
-	va_list ap, ap2;
-	int d;
-	char c, *s;
-
-	va_start(ap, fmt);
-	va_copy(ap2, ap);
-	while (*fmt)
-			switch(*fmt++) {
-			case 's':                       /* string */
-					s = va_arg(ap, char *);
-					printf("string %s\n", s);
-					break;
-			case 'd':                       /* int */
-					d = va_arg(ap, int);
-					printf("int %d\n", d);
-					break;
-			case 'c':                       /* char */
-					/* Note: char is promoted to int. */
-					c = va_arg(ap, int);
-					printf("char %c\n", c);
-					break;
-			}
-	va_end(ap);
-	// ...
-	/* use ap2 to iterate over the arguments again */
-	// ...
-	va_end(ap2);
-}
-
-
-// another example of stdarg
-// int	sum(int count, ...)
-// {
-// 	va_list	args;
-// 	int		total;
-// 	int		i;
-
-// 	total = 0;
-// 	va_start(args, count);
-// 	i = 0;
-// 	while (i < count)
-// 	{
-// 		total += va_arg(args, int);
-// 		i++;
-// 	}
-// 	va_end(args);
-// 	return (total);
-// }
-
-// int	main(void)
-// {
-// 	printf("%d\n", sum(4, 2, 4, 6, 8));
-// }
