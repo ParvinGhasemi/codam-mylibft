@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   num_printer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamohamm <pamohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 16:56:15 by pamohamm          #+#    #+#             */
-/*   Updated: 2025/11/12 20:30:29 by pamohamm         ###   ########.fr       */
+/*   Created: 2025/11/11 16:28:18 by pamohamm          #+#    #+#             */
+/*   Updated: 2025/11/12 21:25:56 by pamohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
+#include "libft/libft.h"
+#include "ft_printf.h"
 
-int	ft_printf(const	char *str, ...);
-int	print_character(char c);
-int	print_string(char *str);
-// int	pf_putnbr_hex(unsigned long num);
-int	print_pointer(void *ptr);
-int	print_hex(int x_char, unsigned int num);
-
-
-#endif
+int	print_hex(int x_char, unsigned int num)
+{
+	char	*hex_chars;
+	int		count;
+	if (x_char == 'X')
+		hex_chars = "0123456789ABCDEF";
+	else if (x_char == 'x')
+		hex_chars = "0123456789abcdef";
+	count = 0;
+	if (num >= 16)
+		count += print_hex(x_char, num / 16);
+	count += print_character(hex_chars[num % 16]);
+	return (count);
+}

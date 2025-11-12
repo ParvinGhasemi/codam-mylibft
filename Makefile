@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR)
 AR = ar rcs
 RM = rm -f
 
@@ -15,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
 	$(AR) $(NAME) $(OBJ)
-	$(AR) -q $(NAME) $(LIBFT)
+	$(AR) $(NAME) $(LIBFT)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
