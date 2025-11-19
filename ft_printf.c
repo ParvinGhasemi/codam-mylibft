@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pamohamm <pamohamm@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:04:53 by pamohamm          #+#    #+#             */
-/*   Updated: 2025/11/12 20:31:47 by pamohamm         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pamohamm <pamohamm@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/11/10 18:04:53 by pamohamm      #+#    #+#                 */
+/*   Updated: 2025/11/15 09:30:50 by parvinm.gha   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ static int	find_format(char character, va_list args)
 	else if (character == 'd' || character == 'i')
 	{
 		char	*str = ft_itoa(va_arg(args, int));
-		len += print_string(ft_itoa(va_arg(args, int)));
+		len += print_string(str);
 		free(str);
 	}
-	// else if (character == 'u')
-	// 	ft_putchar_fd(va_arg(args, unsigned int), 1);
+	else if (character == 'u')
+		len +=print_unsigned_int(va_arg(args, unsigned int));
 	else if (character == 'x')
-		print_hex('x', va_arg(args, unsigned int));
+		len += print_hex('x', va_arg(args, unsigned int));
 	else if (character == 'X')
-		print_hex('X', va_arg(args, unsigned int));
+		len += print_hex('X', va_arg(args, unsigned int));
 	else if (character == '%')
 		len += print_character('%');
 	return (len);
@@ -77,27 +77,27 @@ int	ft_printf(const	char *str, ...)
 	return (final_len);
 }
 
-int main()
-{
-	char *str = "hi";
+// int main()
+// {
+// 	char *str = "hi";
 	
-	int main = printf("main: %p", str);
-	printf("\n");
-	int mine = ft_printf("mine: %p", str);
-	printf("\n");
-	printf("%d vs %d", main, mine);
-	printf("\n\n");
+// 	int main = printf("main: %p", str);
+// 	printf("\n");
+// 	int mine = ft_printf("mine: %p", str);
+// 	printf("\n");
+// 	printf("%d vs %d", main, mine);
+// 	printf("\n\n");
 
-	main = printf("main: %s", str);
-	printf("\n");
-	mine = ft_printf("mine: %s", str);
-	printf("\n");
-	printf("%d vs %d", main, mine);
-	printf("\n\n");
+// 	main = printf("main: %s", str);
+// 	printf("\n");
+// 	mine = ft_printf("mine: %s", str);
+// 	printf("\n");
+// 	printf("%d vs %d", main, mine);
+// 	printf("\n\n");
 
-	printf("%x\n", 987654321);
-	ft_printf("%x\n", 987654321);
-	printf("\n\n");
+// 	printf("%x\n", 987654321);
+// 	ft_printf("%x\n", 987654321);
+// 	printf("\n\n");
 
-	return (0);
-}
+// 	return (0);
+// }

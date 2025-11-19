@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   char_handler.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pamohamm <pamohamm@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 15:42:09 by pamohamm          #+#    #+#             */
-/*   Updated: 2025/11/12 20:21:39 by pamohamm         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   char_handler.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pamohamm <pamohamm@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/11/11 15:42:09 by pamohamm      #+#    #+#                 */
+/*   Updated: 2025/11/15 09:32:36 by parvinm.gha   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	pf_putnbr_hex(unsigned long num)
  */
 int	print_pointer(void *ptr)
 {
-	int				i;
+	// int				i;
 	int				printed;
 	unsigned long	address;
 
